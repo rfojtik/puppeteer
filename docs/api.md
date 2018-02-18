@@ -264,13 +264,13 @@
   * [request.headers()](#requestheaders)
   * [request.isNavigationRequest()](#requestisnavigationrequest)
   * [request.method()](#requestmethod)
+  * [request.monotonicTimeEnd()](#requestmonotonictimeend)
+  * [request.monotonicTimeStart()](#requestmonotonictimestart)
   * [request.postData()](#requestpostdata)
   * [request.redirectChain()](#requestredirectchain)
   * [request.resourceType()](#requestresourcetype)
   * [request.respond(response)](#requestrespondresponse)
   * [request.response()](#requestresponse)
-  * [request.monotonicTimestampStart()](#requestmonotonictimestampstart)
-  * [request.monotonicTimestampEnd()](#requestmonotonictimestampend)
   * [request.url()](#requesturl)
 - [class: Response](#class-response)
   * [response.buffer()](#responsebuffer)
@@ -279,6 +279,7 @@
   * [response.fromServiceWorker()](#responsefromserviceworker)
   * [response.headers()](#responseheaders)
   * [response.json()](#responsejson)
+  * [response.monotonicTimeEnd()](#responsemonotonictimeend)
   * [response.ok()](#responseok)
   * [response.remoteAddress()](#responseremoteaddress)
   * [response.request()](#responserequest)
@@ -286,7 +287,6 @@
   * [response.status()](#responsestatus)
   * [response.statusText()](#responsestatustext)
   * [response.text()](#responsetext)
-  * [response.monotonicTimestampEnd()](#responsemonotonictimestampend)
   * [response.url()](#responseurl)
 - [class: SecurityDetails](#class-securitydetails)
   * [securityDetails.issuer()](#securitydetailsissuer)
@@ -3267,6 +3267,12 @@ Whether this request is driving frame's navigation.
 #### request.method()
 - returns: <[string]> Request's method (GET, POST, etc.)
 
+#### request.monotonicTimeEnd()
+- returns: <[number]> The monotonic timestamp when this request finished or failed.
+
+#### request.monotonicTimeStart()
+- returns: <[number]> The monotonic timestamp when this request started.
+
 #### request.postData()
 - returns: <[string]> Request's post body, if any.
 
@@ -3334,12 +3340,6 @@ page.on('request', request => {
 #### request.response()
 - returns: <?[Response]> A matching [Response] object, or `null` if the response has not been received yet.
 
-#### request.monotonicTimestampStart()
-- returns: <[number]> The monotonic timestamp when this request started.
-
-#### request.monotonicTimestampEnd()
-- returns: <[number]> The monotonic timestamp when this request finished or failed.
-
 #### request.url()
 - returns: <[string]> URL of the request.
 
@@ -3371,6 +3371,9 @@ True if the response was served by a service worker.
 
 This method will throw if the response body is not parsable via `JSON.parse`.
 
+#### response.monotonicTimeEnd()
+- returns: <[number]> The MonotonicTime timestamp when this response happened.
+
 #### response.ok()
 - returns: <[boolean]>
 
@@ -3399,9 +3402,6 @@ Contains the status text of the response (e.g. usually an "OK" for a success).
 
 #### response.text()
 - returns: <[Promise]<[string]>> Promise which resolves to a text representation of response body.
-
-#### response.monotonicTimestampEnd()
-- returns: <[number]> The MonotonicTime timestamp when this response happened.
 
 #### response.url()
 - returns: <[string]>
